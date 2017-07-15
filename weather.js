@@ -10,10 +10,7 @@ app.listen(3000, function(err) {
 
 app.use('/', express.static('./public'));
 
-// Route to get zipcode location information
-app.get('/zipcode/:zip', function(req,res) {
-	res.json(zipcodes.lookup(req.params.zip));
-});
+
 
 // Create our forecast object
 var forecast = new Forecast({
@@ -22,10 +19,23 @@ var forecast = new Forecast({
 	units: 'f'
 });
 
-app.get('/weather/:lat/:long', function(req,res) {
-	var coords = [req.params.lat,req.params.long];
+
+app.get('/weather/:zipcode', function(req,res) {
+	// Convert a zipcode into a location object
+	var location = zipcodes.lookup(req.params.zipcode);
+
+	// Check and make sure location is valid
+	if(!location) return res.status(400).json('Invalid zipcode');
+
+	// Use the location lat/long as coordinates
+	var coords = [location.latitude,location.longitude];
 	forecast.get(coords, function(err,weather) {
-		if(err) return res.json(err);
-		res.json(weather);
+		if(err) return res.status(400).json(err);
+
+		// Send back an object with both location and weather
+		res.json({
+			location: location,
+			weather: weather
+		});
 	});
 });
