@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sergei202/weather#readme",
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "forecast": "^0.3.2"
   }
 }

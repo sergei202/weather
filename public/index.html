@@ -4,18 +4,7 @@
 		<meta charset="utf-8">
 		<title>Weather</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
-		<script>
-			angular.module('weather', [])
-				.controller('WeatherCtrl', function($scope,$http) {
-					$scope.lookup = function() {
-						console.log('lookup() zipcode=', $scope.zipcode);
-						$http.get('/zipcode/'+$scope.zipcode).then(function(res) {
-							console.log('location =', res.data);
-							$scope.location = res.data;
-						});
-					};
-				});
-		</script>
+		<script src="app.js"></script>
 	</head>
 	<body ng-app="weather">
 		<div ng-controller="WeatherCtrl">
@@ -24,6 +13,9 @@
 
 			<br><br>
 			<pre>{{location | json}}</pre>
+
+			<hr>
+			<pre>{{weather | json}}</pre>
 		</div>
 	</body>
 </html>
