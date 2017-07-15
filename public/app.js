@@ -4,7 +4,7 @@ angular.module('weather', [])
 		$scope.lookup = function() {
 			console.log('lookup() zipcode=', $scope.zipcode);
 			$http.get('/weather/'+$scope.zipcode).then(function(res) {
-				console.log('location =', res.data);
+				console.log('weather and location =', res.data);
 				$scope.location = res.data.location;
 				$scope.weather = res.data.weather;
 			}, function(err) {

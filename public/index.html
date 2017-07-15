@@ -11,11 +11,11 @@
 			<input ng-model="zipcode">
 			<input type="button" value="Lookup" ng-click="lookup()">
 
-			<br><br>
-			<pre>{{location | json}}</pre>
-
-			<hr>
-			<pre>{{weather | json}}</pre>
+			<div ng-if="weather">
+				In {{location.city}}, {{location.state}}
+				the temperature is {{weather.currently.temperature}}
+				and {{weather.currently.summary}}
+			</div>
 		</div>
 	</body>
 </html>
