@@ -4,7 +4,7 @@ var Forecast = require('forecast');
 
 var app = express();
 
-app.listen(3000, function(err) {
+app.listen(process.env.PORT || 3000, function(err) {
 	console.log('Weather app: Listening at http://localhost:3000');
 });
 
